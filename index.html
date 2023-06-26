@@ -3,13 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet">
+    <script defer src="script.js"></script>
     <title>Quiz App</title>
 </head>
 <body>
-    <div class = "container"></div>
-        <div id="question_container"></div>
+    <div class = "container">
+        <div id="question_container" class="hide">
+            <div id="question">Question</div>
+            <div id="answer-buttons" class="btn-grid">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+        </div>
         <div class="controls"></div>
-            <button id="start_btn">Start</button>
-            <button>Next</button>
+            <button id="start_btn" class="start_btn btn">Start</button>
+            <button id="next_btn" class="next_btn btn hide">Next</button>
+    </div>
+    
 </body>
 </html>
