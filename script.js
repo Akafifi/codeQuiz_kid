@@ -1,24 +1,28 @@
-const startButton = document.getElementById('start-btn')
-const nextButton = document.getElementById('next-btn')
-const questionContainerElement = document.getElementById('question-container')
+const startButton = document.getElementById('start_btn')
+const nextButton = document.getElementById('next_btn')
+// var startButton = document.querySelector("#start_btn");
+// var nextButton = document.querySelector("#next_btn");
+
+
+const questionContainerElement = document.getElementById('question_container')
 
 const questionElement = document.getElementById('question')
 
-const answerButtonsElement = document.getElementById('answer-buttons')
+const answerButtonsElement = document.getElementById('answer_buttons')
 
 let shuffledQuestions, currentQuestionIndex
 
 startButton.addEventListener('click', startGame)
 nextButton.addEventListener('click', () => {
-  currentQuestionIndex++
-  setNextQuestion()
+    currentQuestionIndex++
+    setNextQuestion()
 })
 
 function startGame() {
     startButton.classList.add('hide')
-    shuffledQuestions = questions.sort(() => Math.random() - .5)
+    shuffledQuestions = questions.sort(() => Math.random - .5)
     currentQuestionIndex = 0
-    questionContainerElement.remove('hide')
+    questionContainerElement.classList.remove('hide')
     setNextQuestion()
 
 }
@@ -43,10 +47,9 @@ function showQuestion(question) {
 }
 
 function resetState() {
-    clearStatusClass(document.body)
     nextButton.classList.add('hide')
     while (answerButtonsElement.firstChild) {
-       answerButtonsElement.removeChild (answerButtonsElement.firstChild)
+       answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
 }
 
@@ -77,7 +80,7 @@ function setStatusClass(element, correct) {
 
 function clearStatusClass(element) {
     element.classList.remove('correct')
-    element.classList.add('wrong')
+    element.classList.remove('wrong')
 }
 const questions = [
     {
