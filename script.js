@@ -1,30 +1,60 @@
-const startButton = document.getElementById('start_btn')
-const nextButton = document.getElementById('next_btn')
-// var startButton = document.querySelector("#start_btn");
-// var nextButton = document.querySelector("#next_btn");
+const questions = [
+    {
+        question: 'Commonly used data types DO NOT include:',
+        answers: [
+            {text: 'strings', correct: false},
+            {text: 'booleans', correct: true},
+            {text: 'alerts', correct: false},
+            {text: 'numbers', correct: false}
+        ]
+    },
+    {
+        question: 'The conditions of an if/else statement are enclosed within:',
+        answers: [
+            {text: 'curly brackets', correct: false},
+            {text: 'quotes', correct: false},
+            {text: 'parentheses', correct: true},
+            {text: 'square brackets', correct: false}
+        ]
+    },
+    {
+        question: 'Which of the following assignments prevents you from changing its value: ',
+        answers: [
+            {text: 'var', correct: false},
+            {text: 'let', correct: false},
+            {text: 'const', correct: true},
+            {text: 'int', correct: false}
+        ]
+    },
+    {
+        question: 'Javascript is object-oriented:',
+        answers: [
+            {text: 'False', correct: false},
+            {text: 'True', correct: true}
+        ]
+    }
+];
 
+const startButton = document.getElementById('start_btn');
+const nextButton = document.getElementById('next_btn');
+const questionContainerElement = document.getElementById('question_container');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answer_buttons');
 
-const questionContainerElement = document.getElementById('question_container')
+let shuffledQuestions, currentQuestionIndex;
 
-const questionElement = document.getElementById('question')
-
-const answerButtonsElement = document.getElementById('answer_buttons')
-
-let shuffledQuestions, currentQuestionIndex
-
-startButton.addEventListener('click', startGame)
+startButton.addEventListener('click', startGame);
 nextButton.addEventListener('click', () => {
-    currentQuestionIndex++
-    setNextQuestion()
-})
+    currentQuestionIndex++;
+    setNextQuestion();
+});
 
 function startGame() {
-    startButton.classList.add('hide')
-    shuffledQuestions = questions.sort(() => Math.random - .5)
-    currentQuestionIndex = 0
-    questionContainerElement.classList.remove('hide')
-    setNextQuestion()
-
+    startButton.classList.add('hide');
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+    currentQuestionIndex = 0;
+    questionContainerElement.classList.remove('hide');
+    setNextQuestion();
 }
 
 function setNextQuestion() {
@@ -82,25 +112,3 @@ function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 }
-const questions = [
-    {
-        question: 'Commonly used data types DO NOT include:',
-        answers: [
-            {text: 'strings', correct: false},
-            {text: 'booleans', correct: true},
-            {text: 'alerts', correct: false},
-            {text: 'numbers', correct: false}
-
-        ]
-
-    },
-    {
-        question: 'The conditions of an if/else statement are enclosed within:',
-        answers: [
-            {text: 'curly brackets', correct: false},
-            {text: 'quotes', correct: false},
-            {text: 'parentheses', correct: true},
-            {text: 'square brackets', correct: false}
-        ]
-    }
-]

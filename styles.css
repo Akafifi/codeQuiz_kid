@@ -10,6 +10,25 @@
     border-radius: 30px;
 }
 
+.hide {
+    display: none;
+}
+
+.correct {
+    color: green;
+    font-weight: bold;
+    background-color: lightgreen;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+    background-color: lightcoral;
+}
+
+  
+  
+
 body {
     padding: 0;
     margin: 0;
