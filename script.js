@@ -40,6 +40,7 @@ const nextButton = document.getElementById('next_btn');
 const questionContainerElement = document.getElementById('question_container');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer_buttons');
+var time = 60
 
 let shuffledQuestions, currentQuestionIndex;
 
@@ -78,6 +79,7 @@ function showQuestion(question) {
 
 function resetState() {
     nextButton.classList.add('hide')
+    document.body.classList.remove('correct', 'wrong')
     while (answerButtonsElement.firstChild) {
        answerButtonsElement.removeChild(answerButtonsElement.firstChild)
     }
@@ -93,17 +95,31 @@ function selectAnswer(e) {
     if (shuffledQuestions.length > currentQuestionIndex + 1) {
         nextButton.classList.remove('hide')
     } else {
-        startButton.innerText = 'Restart'
-        startButton.classList.remove('hide')
+        gameOver()
     }
 
 }
+
+function gameOver() {
+    startButton.innerText = 'Restart'
+    startButton.classList.remove('hide')
+
+    var questions = document.querySelector('#questions')
+    questions.classList.add('hide')
+
+    var endScreen = document.querySelector('#end')
+    endScreen.classList.remove('hide')
+
+    // document.querySelector('#end').classList.remove('hide')
+}
+
 
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if(correct) {
         element.classList.add('correct')
     } else {
+        time = time - 10
         element.classList.add('wrong')
     }
 }
@@ -111,4 +127,37 @@ function setStatusClass(element, correct) {
 function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
+}
+
+const username = document.querySelector('#username')
+const saveScoreBtn = document.querySelector('#saveScoreBtn')
+const finalScore = document.querySelector('#finalScore')
+const mostRecentScore = document.querySelector('#mostRecentScore')
+
+const highScores = JSON.parse(localStorage.getItem('highScores')) || []
+
+const MAX_HIGH_SCORES = 3
+
+// finalScore.innerText = mostRecentScore
+
+username.addEventListener('keyup', () => {
+    saveScoreBtn.disabled = !username.value
+})
+
+function saveHighScore(e) {
+    e.preventDefault()
+
+    const score = {
+        score: mostRecentScore,
+        name: username.value
+    }
+    highScores.push(score)
+
+    highScores.sort((a,b) => {
+        return b.score - a.score
+    })
+    highScores.splice(3)
+
+    localStorage.setItem('highScores', JSON.stringify(highScores))
+    window.location.assign('./index.html')
 }
