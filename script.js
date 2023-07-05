@@ -41,8 +41,10 @@ const questionContainerElement = document.getElementById('question_container');
 const questionElement = document.getElementById('question');
 const answerButtonsElement = document.getElementById('answer_buttons');
 var time = 60
+var getTime = document.querySelector('.timer_part_seconds')
 
 let shuffledQuestions, currentQuestionIndex;
+
 
 startButton.addEventListener('click', startGame);
 nextButton.addEventListener('click', () => {
@@ -51,6 +53,8 @@ nextButton.addEventListener('click', () => {
 });
 
 function startGame() {
+    setInterval(function setTime() {getTime.innerText = time
+        time--}, 1000 )
     startButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
