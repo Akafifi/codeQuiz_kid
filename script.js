@@ -1,3 +1,19 @@
+const startButton = document.getElementById('start_btn');
+const nextButton = document.getElementById('next_btn');
+const questionContainerElement = document.getElementById('question_container');
+const questionElement = document.getElementById('question');
+const answerButtonsElement = document.getElementById('answer_buttons');
+const username = document.querySelector('#username')
+const saveScoreBtn = document.querySelector('#saveScoreBtn')
+const finalScore = document.querySelector('#finalScore')
+const mostRecentScore = document.querySelector('#mostRecentScore')
+const highScores = JSON.parse(localStorage.getItem('highScores')) || []
+const MAX_HIGH_SCORES = 3
+var time = 60
+var getTime = document.querySelector('.timer_part_seconds')
+
+let shuffledQuestions, currentQuestionIndex;
+
 const questions = [
     {
         question: 'Commonly used data types DO NOT include:',
@@ -35,16 +51,6 @@ const questions = [
     }
 ];
 
-const startButton = document.getElementById('start_btn');
-const nextButton = document.getElementById('next_btn');
-const questionContainerElement = document.getElementById('question_container');
-const questionElement = document.getElementById('question');
-const answerButtonsElement = document.getElementById('answer_buttons');
-var time = 60
-var getTime = document.querySelector('.timer_part_seconds')
-
-let shuffledQuestions, currentQuestionIndex;
-
 
 startButton.addEventListener('click', startGame);
 nextButton.addEventListener('click', () => {
@@ -63,7 +69,7 @@ function clockTick() {
         gameOver()
 }
 }
-
+// ----------Incorrect answer time penalty function-----------
 function startGame() {
     timeCount = setInterval(clockTick, 1000)
     startButton.classList.add('hide');
@@ -134,8 +140,6 @@ function gameOver() {
 
     var endScreen = document.querySelector('#end')
     endScreen.classList.remove('hide')
-
-    // document.querySelector('#end').classList.remove('hide')
 }
 
 
@@ -155,15 +159,6 @@ function clearStatusClass(element) {
     element.classList.remove('correct')
     element.classList.remove('wrong')
 }
-
-const username = document.querySelector('#username')
-const saveScoreBtn = document.querySelector('#saveScoreBtn')
-const finalScore = document.querySelector('#finalScore')
-const mostRecentScore = document.querySelector('#mostRecentScore')
-
-const highScores = JSON.parse(localStorage.getItem('highScores')) || []
-
-const MAX_HIGH_SCORES = 3
 
 // finalScore.innerText = mostRecentScore
 
