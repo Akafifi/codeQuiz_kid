@@ -52,9 +52,20 @@ nextButton.addEventListener('click', () => {
     setNextQuestion();
 });
 
+var timeCount;
+function clockTick() {
+    console.log('clock')
+    time --
+    getTime.innerText = time
+    console.log('time')
+
+    if (time<=0){
+        gameOver()
+}
+}
+
 function startGame() {
-    setInterval(function setTime() {getTime.innerText = time
-        time--}, 1000 )
+    timeCount = setInterval(clockTick, 1000)
     startButton.classList.add('hide');
     shuffledQuestions = questions.sort(() => Math.random() - 0.5);
     currentQuestionIndex = 0;
@@ -90,8 +101,16 @@ function resetState() {
 }
 
 function selectAnswer(e) {
+    console.log('e', e)
     const selectedButton = e.target
     const correct = selectedButton.dataset.correct
+
+    console.log('correct', correct)
+    console.log('selectedButton', selectedButton)
+    if (!correct) {
+        time = time -10
+    }
+
     setStatusClass(document.body, correct)
     Array.from(answerButtonsElement.children).forEach(button => {
         setStatusClass(button, button.dataset.correct)
@@ -107,7 +126,9 @@ function selectAnswer(e) {
 function gameOver() {
     startButton.innerText = 'Restart'
     startButton.classList.remove('hide')
-
+    clearInterval(timeCount)
+    console.log('time', time)
+    getTime.innerText = 'Game Over'
     var questions = document.querySelector('#questions')
     questions.classList.add('hide')
 
@@ -121,9 +142,11 @@ function gameOver() {
 function setStatusClass(element, correct) {
     clearStatusClass(element)
     if(correct) {
+        console.log('right')
         element.classList.add('correct')
     } else {
-        time = time - 10
+        console.log('wrong')
+        //time = time - 10
         element.classList.add('wrong')
     }
 }
